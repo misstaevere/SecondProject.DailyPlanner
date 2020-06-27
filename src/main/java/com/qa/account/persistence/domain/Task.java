@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 // Uses ORM - Object Relational Mapper (persistence in this case) (converts Java objects into tables)
 // Jpa - Java Persistance API (converts classes to tables, uses the default const to create the object and then uses the setters to insert values)
 @Entity
@@ -21,10 +23,11 @@ public class Task {
 	@Column(name = "taskName", length = 60) // column is done automatically but makes easier to read and for config
 	private String taskName;
 
-	@Column(nullable = false)
+	@Column(nullable = true) // CHANGE BACK
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date taskDate;
 
-	@Column(nullable = false)
+	@Column(nullable = true) // CHANGE BACK
 	private Time taskTime;
 
 	@Column
@@ -32,6 +35,14 @@ public class Task {
 
 	@ManyToOne(targetEntity = User.class)
 	private User user;
+	
+	
+
+	public Task(String taskName, String taskLocation) {
+		super();
+		this.taskName = taskName;
+		this.taskLocation = taskLocation;
+	}
 
 	public Task(String taskName, Date taskDate, Time taskTime, String taskLocation) {
 		super();

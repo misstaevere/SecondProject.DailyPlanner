@@ -22,6 +22,7 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
+	// SELECT * FROM task WHERE task.id = this.id;
 	@OneToMany(mappedBy = "user")
 	private List<Task> tasks;
 
